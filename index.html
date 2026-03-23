@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside>
+        <div class="logo">STORE</div>
+        <nav>
+            <ul>
+                <li onclick="showPage('dashboard')"><i class="fas fa-th-large"></i> Dashboard</li> 
+                <li onclick="showPage('sales')"><i class="fas fa-chart-line"></i> Sales Overview</li> 
+                <li class="active" id="nav-stocks" onclick="showPage('stocks-page')"><i class="fas fa-boxes"></i> Stocks</li> 
+                <li id="nav-orders" onclick="showPage('orders-page')"><i class="fas fa-shopping-cart"></i> Order History</li> 
+                <li onclick="showPage('profits')"><i class="fas fa-chart-pie"></i> Profits</li> 
+            </ul>
+        </nav>
+        <div class="sidebar-bottom">
+            <nav>
+                <ul>
+                    <li id="nav-profile" onclick="showPage('profile-page')"><i class="fas fa-user"></i> Profile</li> 
+                    <li><i class="fas fa-cog"></i> Settings</li> 
+                    <li><i class="fas fa-sign-out-alt"></i> Logout</li> 
+                    <li><i class="fas fa-question-circle"></i> Help & Support</li> 
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <main>
+        <section id="stocks-page" class="page active">
+            <header>
+                <div class="header-info">
+                    <h1>Stocks</h1>
+                    <p>Track stocks per product and category, notification alerts</p>
+                </div>
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="order-search" class="search-bar" placeholder="Search product name..." onkeyup="filterProducts()">
+                </div>
+            </header>
+
+            <div class="stocks-filters">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="category-filter" class="large-select" onchange="filterProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="cat1">Cat1</option>
+                        <option value="cat2">Cat2</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Stock Range</label>
+                    <select id="range-filter" class="large-select" onchange="filterProducts()">
+                        <option value="all">All Stocks</option>
+                        <option value="low">Low Stock (0-10)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stocks-grid">
+                <div class="product-card">
+                    <div class="category-tag">Cat1</div>
+                    <div class="alert-icon">!</div>
+                    <div class="stock-count">40</div>
+                    <div>Stocks</div>
+                    <div class="product-info">
+                        <span class="product-name">Product 1</span> 
+                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 1', 'Cat1', 40)">→</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="category-tag">Cat2</div>
+                    <div class="alert-icon">!</div>
+                    <div class="stock-count">8</div>
+                    <div>Stocks</div>
+                    <div class="product-info">
+                        <span class="product-name">Product 2</span>
+                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 2', 'Cat2', 8)">→</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="orders-page" class="page">
+            <header>
+                <div class="header-info">
+                    <h1>Order History</h1>
+                    <p>Track orders, transactions, and quantities</p>
+                </div>
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="order-search" class="search-bar" placeholder="Search Transaction ID..." onkeyup="filterOrders()">
+                </div>
+            </header>
+
+            <div class="table-frame">
+                <table class="orders-table" id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th onclick="sortTable(1)">Transaction ID <i class="fas fa-sort"></i></th>
+                            <th>
+                                Date 
+                                <select id="date-filter" class="header-filter" onchange="filterByDate()">
+                                    <option value="all">All</option>
+                                    <option value="latest">Latest</option>
+                                    <option value="oldest">Oldest</option>
+                                    <option value="recent">Recent Month</option>
+                                </select>
+                            </th>
+                            <th onclick="sortTable(3)">Quantity <i class="fas fa-sort"></i></th>
+                            <th onclick="sortTable(4)">Amount <i class="fas fa-sort"></i></th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1234567890</td>
+                            <td class="order-date">1/11/2026</td>
+                            <td>5</td>
+                            <td>200</td>
+                            <td><a href="javascript:void(0)" class="details-link" onclick="showTransactionDetails('1234567890', '1/11/2026')">Details ▶</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1234567891</td>
+                            <td class="order-date">2/15/2026</td>
+                            <td>4</td>
+                            <td>100</td>
+                            <td><a href="#" class="details-link">Details ▶</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button class="pag-btn">Previous</button>
+                <span class="pag-text">Page 1 out of 10 Pages</span>
+                <button class="pag-btn">Next</button>
+            </div>
+        </section>
+
+        <section id="profile-page" class="page">
+            <div class="profile-container">
+                <label for="id-upload" class="avatar-upload-label">
+                    <div class="avatar-circle" id="profile-display">
+                        <i class="fas fa-camera upload-icon"></i>
+                    </div>
+                    <input type="file" id="id-upload" accept="image/*" hidden onchange="previewImage(this)">
+                </label>
+
+                <h2>Username</h2> 
+                <div class="info-row"><strong>User ID:</strong> <span id="user-id-display">000012345</span></div>
+                <div class="user-badge">User</div>
+                
+                <div class="info-row">
+                    <strong>Contact No:</strong> 
+                    <span id="contact-display">09XX-XXX-XXXX</span>
+                    <input type="text" id="contact-input" class="edit-input" value="09XX-XXX-XXXX" style="display: none;">
+                    <button class="icon-btn" onclick="toggleEdit('contact')">
+                        <i class="fas fa-edit" id="contact-icon"></i>
+                    </button>
+                </div> 
+                <div class="info-row"><strong>Password:</strong>
+                    <button class="btn-primary">Change Password</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+    <div id="details-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            </div>
+    </div>
+</div>
+</body>
+</html>
