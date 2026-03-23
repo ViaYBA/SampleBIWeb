@@ -169,7 +169,7 @@ function showTransactionDetails(id, date) {
     modal.style.display = "flex";
 }
 
-// Close modal when clicking outside of it
+//Close modal when clicking outside of it
 window.onclick = function(event) {
     const modal = document.getElementById('details-modal');
     if (event.target == modal) {
