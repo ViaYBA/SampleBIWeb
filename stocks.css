@@ -1,0 +1,267 @@
+:root{
+    --bg-sidebar: #153b2c; /*Deep Green*/
+    --bg-main: #e6e7e8;    /*Light Grey*/
+    --accent-tan: #e9edc9; /*Tan color used for headers and badges*/
+    --low-stock-red: #d00000;
+    --white: #ffffff;
+    --border-dark: #000000;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-main);
+}
+
+/*--Sidebar Navigation--*/
+aside{
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0 25px 40px;
+    color: #e9edc9;
+}
+
+nav ul{
+    list-style: none;
+}
+
+nav li{
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    color: #cbd5e0;
+}
+
+nav li i{
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+nav li.active{
+    background-color: var(--nav-active);
+    color: white;
+    border-left: 4px solid var(--card-green);
+}
+
+.sidebar-bottom{
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/*--Layout--*/
+
+/*Main Content Wrapper*/
+main{
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+/*Product Cards*/
+.stocks-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.product-card{
+    background-color: var(--white) !important;
+    border: 3px solid var(--border-dark);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.stock-count{
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--border-dark);
+}
+
+.category-tag{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    background: white;
+    border: 1px solid var(--border-dark);
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.alert-icon{
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #d00000;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.low-stock-alert .alert-icon{ 
+    display: block;
+    color: var(--low-stock-red);
+}
+
+.low-stock-alert .stock-count{ color: #d00000; }
+
+.product-info{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.details-link{
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
+
+/*Order History Table*/
+.orders-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th{
+    background-color: var(--accent-tan);
+    color: var(--border-dark);
+    padding: 15px;
+    border: 1px solid var(--border-dark);
+    text-transform: none;
+}
+
+.orders-table td{
+    border: 1px solid var(--border-dark);
+    padding: 12px;
+    text-align: center;
+    background-color: var(--white);
+}
+
+/*--Search & Filters--*/
+
+/*Search Bar*/
+.search-wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.search-bar{
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 10px 15px 10px 45px;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.search-icon{
+    position: absolute;
+    left: 15px;
+    font-size: 1.1rem;
+    color: #000;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/*Stocks Filter*/
+.stocks-filters{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.filter-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.large-select{
+    padding: 10px;
+    border: 2px solid var(--border-dark);
+    border-radius: 8px;
+}
+
+/*--JS Functions--*/
+.stock-status-low{
+    color: var(--low-stock-red);
+    font-weight: bold;
+}
+
+/*Modal*/
+.modal-overlay{
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content{
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    width: 70%;
+    max-width: 800px;
+    position: relative;
+    border: 3px solid var(--border-dark);
+}
+
+.close-modal{
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/*Specific Modal Elements*/
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

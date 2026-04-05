@@ -1,0 +1,69 @@
+<!--SEPARATE: PROFILE PAGE-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Store Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+<!--Sidebar Navigation-->
+    <aside>
+        <div class="logo">STORE</div>
+        <nav>
+            <ul>
+                <li><i class="fas fa-th-large"></i> Dashboard</li> 
+                <li><i class="fas fa-chart-line"></i> Sales Overview</li> 
+                <li onclick="location.href='stocks.html'"><i class="fas fa-boxes"></i> Stocks</li> 
+                <li onclick="location.href='orderhis.html'"><i class="fas fa-shopping-cart"></i> Order History</li> 
+                <li><i class="fas fa-chart-pie"></i> Profits</li> 
+            </ul>
+        </nav>
+        <div class="sidebar-bottom">
+            <nav>
+                <ul>
+                    <li class="active" onclick="location.href='profile.html'"><i class="fas fa-user"></i> Profile</li> 
+                    <li><i class="fas fa-cog"></i> Settings</li> 
+                    <li><i class="fas fa-sign-out-alt"></i> Logout</li> 
+                    <li><i class="fas fa-question-circle"></i> Help & Support</li> 
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+<!--Profile Page-->
+    <main>
+        <div class="profile-container">
+            <label for="id-upload" class="avatar-upload-label">
+                <div class="avatar-circle" id="profile-display">
+                    <i class="fas fa-camera upload-icon"></i>
+                </div>
+                <input type="file" id="id-upload" accept="image/*" hidden onchange="previewImage(this)">
+            </label>
+
+            <h2 class="username-text">Username</h2> 
+            <div class="info-row"><strong>User ID:</strong> <span>000012345</span></div>
+            <div class="user-badge">User</div>
+            
+                <div class="info-row">
+                    <strong>Contact No:</strong> 
+                    <span id="contact-display">09XX-XXX-XXXX</span>
+                    <input type="text" id="contact-input" class="edit-input" value="09XX-XXX-XXXX" style="display: none;">
+                    <button class="icon-btn" onclick="toggleEdit('contact')">
+                        <i class="fas fa-edit" id="contact-icon"></i>
+                    </button>
+                </div> 
+
+            <div class="password-row">
+                <strong>Password:</strong>
+                <button class="btn-primary">Change Password</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

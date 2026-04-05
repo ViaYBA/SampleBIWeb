@@ -1,0 +1,107 @@
+<!--SEPARATE: ORDER HISTORY PAGE-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Store Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="orderhis.css">
+</head>
+<body>
+<!--Sidebar Navigation-->
+    <aside>
+        <div class="logo">STORE</div>
+        <nav>
+            <ul>
+                <li><i class="fas fa-th-large"></i> Dashboard</li> 
+                <li><i class="fas fa-chart-line"></i> Sales Overview</li> 
+                <li onclick="location.href='stocks.html'"><i class="fas fa-boxes"></i> Stocks</li> 
+                <li class="active" onclick="location.href='orderhis.html'"><i class="fas fa-shopping-cart"></i> Order History</li> 
+                <li><i class="fas fa-chart-pie"></i> Profits</li> 
+            </ul>
+        </nav>
+        <div class="sidebar-bottom">
+            <nav>
+                <ul>
+                    <li onclick="location.href='profile.html'"><i class="fas fa-user"></i> Profile</li> 
+                    <li><i class="fas fa-cog"></i> Settings</li> 
+                    <li><i class="fas fa-sign-out-alt"></i> Logout</li> 
+                    <li><i class="fas fa-question-circle"></i> Help & Support</li> 
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+<!--Order History Page-->
+    <main>
+        <header>
+            <div class="header-info">
+                <h1>Order History</h1>
+                <p>Track orders, transactions, and quantities</p>
+            </div>
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="order-search" class="search-bar" placeholder="Search Transaction ID..." onkeyup="filterOrders()">
+            </div>
+        </header>
+
+        <div class="table-frame">
+            <table class="orders-table" id="orders-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th onclick="sortTable(1)">Transaction ID <i class="fas fa-sort"></i></th>
+                        <th>
+                            Date 
+                            <select id="sortDate" class="header-filter" onchange="sortByDate()">
+                                <option value="all">All</option>
+                                <option value="latest">Latest</option>
+                                <option value="oldest">Oldest</option>
+                            </select>
+                        </th>
+                        <th onclick="sortTable(3)">Quantity <i class="fas fa-sort"></i></th>
+                        <th onclick="sortTable(4)">Amount <i class="fas fa-sort"></i></th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1234567890</td>
+                        <td class="order-date">1/11/2026</td>
+                        <td>5</td>
+                        <td>200</td>
+                        <td><a href="javascript:void(0)" class="details-link" onclick="showTransactionDetails('1234567890', '1/11/2026')">Details ▶</a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1234567891</td>
+                        <td class="order-date">2/15/2026</td>
+                        <td>4</td>
+                        <td>100</td>
+                        <td><a href="javascript:void(0)" class="details-link">Details ▶</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button class="pag-btn">Previous</button>
+            <span class="pag-text">Page 1 out of 10 Pages</span>
+            <button class="pag-btn">Next</button>
+        </div>
+    </main>
+
+<!--Modal-->
+    <div id="details-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="orderhis.js"></script>
+</body>
+</html>

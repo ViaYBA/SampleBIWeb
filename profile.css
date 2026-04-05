@@ -1,0 +1,188 @@
+:root{
+    --bg-sidebar: #153b2c; /*Deep Green*/
+    --bg-main: #e6e7e8;    /*Light Grey*/
+    --accent-tan: #e9edc9; /*Tan color used for headers and badges*/
+    --low-stock-red: #d00000;
+    --white: #ffffff;
+    --border-dark: #000000;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body{
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-main);
+}
+
+/*--Sidebar Navigation--*/
+aside{
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0 25px 40px;
+    color: #e9edc9;
+}
+
+nav ul{
+    list-style: none;
+}
+
+nav li{
+    padding: 15px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    color: #cbd5e0;
+}
+
+nav li i{
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+nav li.active{
+    background-color: var(--nav-active);
+    color: white;
+    border-left: 4px solid var(--card-green);
+}
+
+.sidebar-bottom{
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/*--Layout--*/
+
+/*Main Content Wrapper*/
+main{
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+/*--Profile Section--*/
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.avatar-circle{
+    width: 150px;
+    height: 150px;
+    background-color: #5c3d2e;
+    border: 5px solid var(--border-dark);
+    border-radius: 50%;
+    margin-bottom: 20px;
+    overflow: hidden; /*Clip uploaded image to a circle*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.avatar-upload-label{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+/*Show camera icon when hovering over the circle*/
+.avatar-upload-label:hover .avatar-circle::after{
+    content: "Upload ID";
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.upload-icon{
+    color: rgba(255,255,255,0.5);
+    font-size: 2rem;
+}
+
+.username-text{ 
+    font-size: 1.8rem; 
+    margin-bottom: 5px; 
+}
+
+.user-badge{
+    background-color: var(--accent-tan);
+    border: 2px solid var(--border-dark);
+    border-radius: 20px; 
+    padding: 5px 30px;
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 0.9rem;
+}
+
+.info-row{
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.edit-input{
+    padding: 5px 10px;
+    border: 1px solid var(--border-dark);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 150px;
+}
+
+/*--Buttons--*/
+.btn-primary{
+    background-color: var(--bg-sidebar);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.icon-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    color: var(--bg-sidebar);
+    transition: transform 0.2s;
+}
+
+.icon-btn:hover{
+    transform: scale(1.1);
+}

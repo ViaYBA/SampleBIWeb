@@ -1,7 +1,7 @@
 :root {
-    --bg-sidebar: #153b2c; /* Deep Green */
-    --bg-main: #e6e7e8;    /* Light Grey */
-    --accent-tan: #e9edc9; /* Tan color used for headers and badges */
+    --bg-sidebar: #153b2c; /*Deep Green*/
+    --bg-main: #e6e7e8;    /*Light Grey*/
+    --accent-tan: #e9edc9; /*Tan color used for headers and badges*/
     --low-stock-red: #d00000;
     --white: #ffffff;
     --border-dark: #000000;
@@ -20,7 +20,7 @@ body {
     background-color: var(--bg-main);
 }
 
-/* Sidebar Navigation */
+/*Sidebar Navigation*/
 aside {
     width: 250px;
     background-color: var(--bg-sidebar);
@@ -69,7 +69,7 @@ nav li.active {
     border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Main Content Wrapper */
+/*Main Content Wrapper*/
 main {
     flex-grow: 1;
     padding: 40px;
@@ -87,7 +87,7 @@ header {
     margin-bottom: 30px;
 }
 
-/* Search Bar */
+/*Search Bar*/
 .search-wrapper {
     position: relative;
     display: flex;
@@ -114,7 +114,7 @@ header {
     z-index: 5;
 }
 
-/* Header Filter Selects */
+/*Header Filter Selects*/
 .header-filter { 
     margin-left: 5px; 
     border: 1px solid #ccc; 
@@ -124,7 +124,7 @@ header {
     cursor: pointer; 
 }
 
-/* Stocks Filter */
+/*Stocks Filter*/
 .stocks-filters {
     display: flex;
     gap: 30px;
@@ -144,7 +144,7 @@ header {
     border-radius: 8px;
 }
 
-/* Product Cards */
+/*Product Cards*/
 .stocks-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -209,7 +209,7 @@ header {
     font-weight: bold;
 }
 
-/* Order History Table */
+/*Order History Table*/
 .table-frame {
     background-color: var(--white);
     border: 3px solid var(--border-dark);
@@ -239,7 +239,7 @@ header {
     background-color: var(--white);
 }
 
-/* Pagination */
+/*Pagination*/
 .pagination {
     display: flex;
     justify-content: center;
@@ -259,7 +259,7 @@ header {
     color: #444;
 }
 
-/* Profile Section */
+/*Profile Section*/
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -296,7 +296,7 @@ header {
     margin-top: 15px;
 }
 
-/* Profile */
+/*Profile*/
 .avatar-upload-label {
     cursor: pointer;
     position: relative;
@@ -310,7 +310,7 @@ header {
     border: 5px solid var(--border-dark);
     border-radius: 50%;
     margin-bottom: 20px;
-    overflow: hidden; /* Clips the uploaded image to a circle */
+    overflow: hidden; /*Clips uploaded image to a circle*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,7 +318,7 @@ header {
     background-position: center;
 }
 
-/* Show a camera icon when hovering over the circle */
+/*Shows camera icon when hovering over the circle*/
 .avatar-upload-label:hover .avatar-circle::after {
     content: "Upload ID";
     position: absolute;
@@ -365,7 +365,7 @@ header {
     transform: scale(1.1);
 }
 
-/* Modal */
+/*Modal*/
 .modal-overlay {
     display: none;
     position: fixed;
@@ -397,7 +397,7 @@ header {
     cursor: pointer;
 }
 
-/* Specific Modal Elements */
+/*Specific Modal Elements*/
 .modal-header {
     display: flex;
     justify-content: space-between;

@@ -1,0 +1,104 @@
+<!--SEPARATE: STOCKS PAGE-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks - Store Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="stocks.css">
+</head>
+<body>
+<!--Sidebar Navigation-->
+    <aside>
+        <div class="logo">STORE</div>
+        <nav>
+            <ul>
+                <li><i class="fas fa-th-large"></i> Dashboard</li> 
+                <li><i class="fas fa-chart-line"></i> Sales Overview</li> 
+                <li class="active" onclick="location.href='stocks.html'"><i class="fas fa-boxes"></i> Stocks</li> 
+                <li onclick="location.href='orderhis.html'"><i class="fas fa-shopping-cart"></i> Order History</li> 
+                <li><i class="fas fa-chart-pie"></i> Profits</li> 
+            </ul>
+        </nav>
+        <div class="sidebar-bottom">
+            <nav>
+                <ul>
+                    <li onclick="location.href='profile.html'"><i class="fas fa-user"></i> Profile</li> 
+                    <li><i class="fas fa-cog"></i> Settings</li> 
+                    <li><i class="fas fa-sign-out-alt"></i> Logout</li> 
+                    <li><i class="fas fa-question-circle"></i> Help & Support</li> 
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+<!--Stocks Page-->
+    <main>
+        <section id="stocks-page" class="page active">
+            <header>
+                <div class="header-info">
+                    <h1>Stocks</h1>
+                    <p>Track stocks per product and category, notification alerts</p>
+                </div>
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="stock-search" class="search-bar" placeholder="Search product name..." onkeyup="filterProducts()">
+                </div>
+            </header>
+
+            <div class="stocks-filters">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="category-filter" class="large-select" onchange="filterProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="cat1">Cat1</option>
+                        <option value="cat2">Cat2</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Stock Range</label>
+                    <select id="range-filter" class="large-select" onchange="filterProducts()">
+                        <option value="all">All Stocks</option>
+                        <option value="low">Low Stock (0-10)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stocks-grid">
+                <div class="product-card" data-stock="40" data-category="cat1">
+                    <div class="category-tag">Cat1</div>
+                    <div class="alert-icon">!</div>
+                    <div class="stock-count">40</div>
+                    <div>Stocks</div>
+                    <div class="product-info">
+                        <span class="product-name">Product 1</span> 
+                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 1', 'Cat1', 40)">→</a>
+                    </div>
+                </div>
+                <div class="product-card" data-stock="8" data-category="cat2">
+                    <div class="category-tag">Cat2</div>
+                    <div class="alert-icon">!</div>
+                    <div class="stock-count">8</div>
+                    <div>Stocks</div>
+                    <div class="product-info">
+                        <span class="product-name">Product 2</span>
+                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 2', 'Cat2', 8)">→</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!--Modal-->
+    <div id="details-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="stocks.js"></script>
+</body>
+</html>
