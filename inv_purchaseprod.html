@@ -1,0 +1,183 @@
+<!--SEPARATE: INVENTORY-PURCHASE PRODUCTS PAGE-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Product - Inventory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="inv_purchaseprod.css">
+</head>
+<body>
+<!--Sidebar Navigation-->
+    <aside>
+        <div class="logo">STORE</div>
+        <nav>
+            <ul>
+                <li><i class="fas fa-th-large"></i> Dashboard</li> 
+                <li><i class="fas fa-chart-line"></i> Sales Overview</li> 
+                <li onclick="location.href='stocks.html'"><i class="fas fa-boxes"></i> Stocks</li> 
+                <li onclick="location.href='orderhis.html'"><i class="fas fa-shopping-cart"></i> Order History</li>
+                <li><i class="fas fa-chart-pie"></i> Profits</li> 
+    <!--Inventory Navigation-->
+                <li class="inventory-header">Inventory</li>
+                <li style="padding-left: 40px;"><i class="fas fa-plus-circle"></i> Add Product</li>
+                <li style="padding-left: 40px;"><i class="fas fa-truck-loading"></i> Add Stock</li>
+                <li class="active" style="padding-left: 40px;"><i class="fas fa-shopping-basket"></i> Purchase Product</li>
+            </ul>
+        </nav>
+        <div class="sidebar-bottom">
+            <nav>
+                <ul>
+                    <li onclick="location.href='profile.html'"><i class="fas fa-user"></i> Profile</li> 
+                    <li><i class="fas fa-cog"></i> Settings</li> 
+                    <li><i class="fas fa-sign-out-alt"></i> Logout</li> 
+                    <li><i class="fas fa-question-circle"></i> Help & Support</li> 
+                </ul>
+            </nav>
+        </div>
+    </aside>
+<!--Inventory: Purchase Products Page-->
+    <main>
+        <header>
+            <div class="header-info">
+                <h1>Inventory</h1>
+                <p>Manage products, stocks and suppliers</p>
+            </div>
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="stock-search" class="search-bar" placeholder="Search here..." onkeyup="filterProducts()">
+            </div>
+        </header>
+
+        <section class="purchase-container">
+            <div class="purchase-product-top">
+                <h2>Purchase Product</h2>
+                <button class="add-btn" onclick="openAddModal()">+ ADD PRODUCT</button>   
+            </div>
+            
+            <div class="purchase-controls">
+                <div class="display-text">
+                    <p id="date-time-display">Date & Time: </p>
+                </div>
+
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="stock-search" class="search-bar" placeholder="Search product..." onkeyup="filterProducts()">
+                </div>
+                
+                <div class="filter-group">
+                    <select id="category-filter" class="large-select" onchange="filterProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="cat1">Cat1</option>
+                        <option value="cat2">Cat2</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="purchase-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Size</th>
+                        <th>Category</th>
+                        <th>QTY</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="purchase-body">
+                    </tbody>
+            </table>
+
+            <div class="purchase-footer" id="purchase-footer">
+                <div class="display-text">
+                    Total Amount: <span id="grand-total">0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="openCheckoutModal()">CHECK OUT</button>
+            </div>
+        </section>
+    </main>
+
+<!--Add Product Modal-->
+    <div id="add-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('add-modal')">&times;</span>
+            <h2 class="modal-title">ADD PRODUCT</h2>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>PRODUCT NAME:</label>
+                    <select id="p-name" onchange="updateProductDetails()">
+                        <option value="" disabled selected>Select a product</option>
+                        <option value="pr1">Product 1</option>
+                        <option value="pr2">Product 2</option>
+                        <option value="pr3">Product 3</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>PRICE:</label>
+                    <input type="text" id="p-price" readonly>
+                </div>
+                <div class="input-group">
+                    <label>CATEGORY:</label>
+                    <input type="text" id="p-cat" readonly>
+                </div>
+                <div class="input-group">
+                    <label>BAR CODE:</label>
+                    <input type="text" id="p-barcode" readonly>
+                </div>
+                <div class="input-group">
+                    <label>SIZE:</label>
+                    <input type="text" id="p-size" readonly>
+                </div>
+                <div class="input-group">
+                    <label>TOTAL AMOUNT:</label>
+                    <input type="text" id="p-total" readonly value="0.00">
+                </div>
+                <div class="input-group">
+                    <label>QUANTITY:</label>
+                    <input type="number" id="p-qty" value="1" min="1" oninput="calculateModalTotal()">
+                </div>
+            </div>
+            <button class="apply-btn" onclick="addItemToTable()">APPLY</button>
+        </div>
+    </div>
+
+<!--Checkout Modal-->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-content checkout-modal-box">
+            <span class="close-modal" onclick="closeModal('checkout-modal')">&times;</span>
+            
+            <div id="checkout-step-1">
+                <h2 style="margin-bottom: 20px;">Payment Details</h2>
+                <div class="input-group">
+                    <label>MODE OF PAYMENT</label>
+                    <select id="pay-mode">
+                        <option>Cash</option>
+                        <option>GCash</option>
+                    </select>
+                </div>
+                <div class="input-group" style="margin-top: 15px;">
+                    <label>ENTER AMOUNT</label>
+                    <input type="number" id="pay-amount">
+                </div>
+                <button class="proceed-btn" onclick="processPayment()">PROCEED</button>
+            </div>
+
+            <div id="checkout-step-2" style="display: none;">
+                <div class="checkout-summary">
+                    <p>TOTAL AMOUNT: <span id="summary-total">0.00</span></p>
+                    <p>PAYMENT: <span id="summary-payment">0.00</span></p>
+                    <p>CHANGE: <span id="summary-change">0.00</span></p>
+                    <button class="done-btn" onclick="finalizePurchase()" id="done-btn">DONE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="inv_purchaseprod.js"></script>
+</body>
+</html>

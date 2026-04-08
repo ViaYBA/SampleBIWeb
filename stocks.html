@@ -36,59 +36,57 @@
 
 <!--Stocks Page-->
     <main>
-        <section id="stocks-page" class="page active">
-            <header>
-                <div class="header-info">
-                    <h1>Stocks</h1>
-                    <p>Track stocks per product and category, notification alerts</p>
-                </div>
-                <div class="search-wrapper">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="stock-search" class="search-bar" placeholder="Search product name..." onkeyup="filterProducts()">
-                </div>
-            </header>
+        <header>
+            <div class="header-info">
+                <h1>Stocks</h1>
+                <p>Track stocks per product and category, notification alerts</p>
+            </div>
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="stock-search" class="search-bar" placeholder="Search product name..." onkeyup="filterProducts()">
+            </div>
+        </header>
 
-            <div class="stocks-filters">
-                <div class="filter-group">
-                    <label>Category</label>
-                    <select id="category-filter" class="large-select" onchange="filterProducts()">
-                        <option value="all">All Categories</option>
-                        <option value="cat1">Cat1</option>
-                        <option value="cat2">Cat2</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Stock Range</label>
-                    <select id="range-filter" class="large-select" onchange="filterProducts()">
-                        <option value="all">All Stocks</option>
-                        <option value="low">Low Stock Level</option>
-                    </select>
+        <div class="stocks-filters">
+            <div class="filter-group">
+                <label>Category</label>
+                <select id="category-filter" class="large-select" onchange="filterProducts()">
+                    <option value="all">All Categories</option>
+                    <option value="cat1">Cat1</option>
+                    <option value="cat2">Cat2</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Stock Range</label>
+                <select id="range-filter" class="large-select" onchange="filterProducts()">
+                    <option value="all">All Stocks</option>
+                    <option value="low">Low Stock Level</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stocks-grid">
+            <div class="product-card" data-stock="40" data-category="cat1" data-barcode="23304291" data-minstock="10">
+                <div class="category-tag">Cat1</div>
+                <div class="alert-icon">!</div>
+                <div class="stock-count">40</div>
+                <div>Stocks</div>
+                <div class="product-info">
+                    <span class="product-name">Product 1</span> 
+                    <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 1', 'Cat1', 40, '23304291', 10)">→</a>
                 </div>
             </div>
-
-            <div class="stocks-grid">
-                <div class="product-card" data-stock="40" data-category="cat1" data-barcode="23304291" data-minstock="10">
-                    <div class="category-tag">Cat1</div>
-                    <div class="alert-icon">!</div>
-                    <div class="stock-count">40</div>
-                    <div>Stocks</div>
-                    <div class="product-info">
-                        <span class="product-name">Product 1</span> 
-                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 1', 'Cat1', 40, '23304291', 10)">→</a>
-                    </div>
-                </div>
-                <div class="product-card" data-stock="8" data-category="cat2" data-barcode="23404203" data-minstock="10">
-                    <div class="category-tag">Cat2</div>
-                    <div class="alert-icon">!</div>
-                    <div class="stock-count">8</div>
-                    <div>Stocks</div>
-                    <div class="product-info">
-                        <span class="product-name">Product 2</span>
-                        <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 2', 'Cat2', 8, '23404203', 10)">→</a>
-                    </div>
+            <div class="product-card" data-stock="8" data-category="cat2" data-barcode="23404203" data-minstock="10">
+                <div class="category-tag">Cat2</div>
+                <div class="alert-icon">!</div>
+                <div class="stock-count">8</div>
+                <div>Stocks</div>
+                <div class="product-info">
+                    <span class="product-name">Product 2</span>
+                    <a href="javascript:void(0)" class="details-link" onclick="showStockDetails('Product 2', 'Cat2', 8, '23404203', 10)">→</a>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
 <!--Modal-->

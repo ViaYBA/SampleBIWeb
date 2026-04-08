@@ -1,4 +1,4 @@
-//--ORDER HISTORY TABLE ORDER SORTING
+//--ORDER HISTORY TABLE ORDER SORTING--
 let sortDirection = true;
 function sortTable(colIndex) {
     const table = document.getElementById("orders-table");
