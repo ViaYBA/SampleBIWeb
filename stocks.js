@@ -1,3 +1,41 @@
+//--SAMPLE PRODUCT DATABASE--
+const stocksDb = [
+    {name: "Product 1", category: "Cat1", stock: 40, barcode: "23304291", minStock: 10},
+    {name: "Product 2", category: "Cat2", stock: 8, barcode: "23404203", minStock: 10},
+    {name: "Product 3", category: "Cat1", stock: 15, barcode: "23404205", minStock: 5}
+];
+
+//--LOAD STOCKS CARDS--
+function loadStocks() {
+    const grid = document.querySelector('.stocks-grid');
+    grid.innerHTML = '';
+
+    stocksDb.forEach(product => {
+        const isLow = product.stock <= product.minStock;
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        if (isLow) card.classList.add('low-stock-alert'); //Low stock red alert
+        //Sets data attributes
+        card.setAttribute('data-stock', product.stock);
+        card.setAttribute('data-category', product.category.toLowerCase());
+        card.setAttribute('data-barcode', product.barcode);
+        card.setAttribute('data-minstock', product.minStock);
+
+        card.innerHTML = `
+            <div class="category-tag">${product.category}</div>
+            ${isLow ? '<div class="alert-icon">!</div>' : ''}
+            <div class="stock-count">${product.stock}</div>
+            <div>Stocks</div>
+            <div class="product-info">
+                <span class="product-name">${product.name}</span> 
+                <a href="javascript:void(0)" class="details-link" 
+                   onclick="showStockDetails('${product.name}', '${product.category}', ${product.stock}, '${product.barcode}', ${product.minStock})">→</a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
 //--STOCKS FILTERS--
 function filterProducts() {
     //Product search, category filter, and stock range filter
@@ -52,10 +90,24 @@ function showStockDetails(name, cat, count, barcode, minStock) {
         </div>
         <h3 style="margin-top:20px;">Order History</h3>
         <table class="orders-table">
-            <thead><tr><th>Date</th><th>Size / Variation</th><th>Quantity</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Size / Variation</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr><td>2/10/2026</td><td>Size 1</td><td>50</td></tr>
-                <tr><td>1/15/2026</td><td>Size 1</td><td>50</td></tr>
+                <tr>
+                    <td>2/10/2026</td>
+                    <td>Size 1</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>1/15/2026</td>
+                    <td>Size 1</td>
+                    <td>50</td>
+                </tr>
             </tbody>
         </table>`;
     modal.style.display = "flex";
@@ -67,12 +119,7 @@ function closeModal() {
 }
 
 window.onload = () => {
-    document.querySelectorAll('.product-card').forEach(card => {
-        const stock = parseInt(card.getAttribute('data-stock'));
-        const minStock = parseInt(card.getAttribute('data-minstock'));
-    
-        card.classList.toggle('low-stock-alert', stock <= minStock);
-    });
+    loadStocks();
 };
 
 window.onclick = function(event) {

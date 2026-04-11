@@ -3,9 +3,9 @@ let editIndex = -1; // -1 means "Add mode"
 
 //--SAMPLE PRODUCT DATABASE--
 const productDb = {
-    "pr1": { price: 100, category: "Cat1", barcode: "23304291", size: " " },
-    "pr2": { price: 35, category: "Cat2", barcode: "23404203", size: " " },
-    "pr3": { price: 50, category: "Cat1", barcode: "23404204", size: " " }
+    "pr1": {price: 100, category: "Cat1", barcode: "23304291", size: " "},
+    "pr2": {price: 35, category: "Cat2", barcode: "23404203", size: " "},
+    "pr3": {price: 50, category: "Cat1", barcode: "23404204", size: " "}
 };
 
 //--REAL TIME CLOCK--
@@ -73,12 +73,13 @@ function addItemToTable() {
         purchaseList.push(item); //Add new item
     }
 
-    renderTable();
+    loadTable();
     closeModal('add-modal');
     resetAddModal();
 }
 
-function renderTable() {
+//--LOAD TABLE--
+function loadTable() {
     const tbody = document.getElementById('purchase-body');
     const footer = document.getElementById('purchase-footer');
     tbody.innerHTML = '';
@@ -129,7 +130,7 @@ function editItem(index) {
 
 function removeItem(index) {
     purchaseList.splice(index, 1);
-    renderTable();
+    loadTable();
 }
 
 //--TWO-STEP CHECKOUT LOGIC--
@@ -166,7 +167,7 @@ function processPayment() {
 function finalizePurchase() {
     alert("Purchase Successful!");
     purchaseList = [];
-    renderTable();
+    loadTable();
     closeModal('checkout-modal');
 }
 

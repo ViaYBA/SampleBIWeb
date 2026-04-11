@@ -55,10 +55,12 @@
                         <th onclick="sortTable(1)">Transaction ID <i class="fas fa-sort"></i></th>
                         <th>
                             Date 
-                            <select id="sortDate" class="header-filter" onchange="sortByDate()">
-                                <option value="all">All</option>
+                            <select id="sortDate" class="header-filter" onchange="applyDateLogic()">
                                 <option value="latest">Latest</option>
                                 <option value="oldest">Oldest</option>
+                                <option value="year">This Year</option>
+                                <option value="month">This Month</option>
+                                <option value="week">This Week</option>
                             </select>
                         </th>
                         <th onclick="sortTable(3)">Quantity <i class="fas fa-sort"></i></th>
@@ -67,22 +69,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1234567890</td>
-                        <td class="order-date">1/11/2026</td>
-                        <td>5</td>
-                        <td>200</td>
-                        <td><a href="javascript:void(0)" class="details-link" onclick="showTransactionDetails('1234567890', '1/11/2026')">Details ▶</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1234567891</td>
-                        <td class="order-date">2/15/2026</td>
-                        <td>4</td>
-                        <td>100</td>
-                        <td><a href="javascript:void(0)" class="details-link">Details ▶</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
