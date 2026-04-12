@@ -1,8 +1,25 @@
 //--SAMPLE PRODUCT DATABASE--
 const stocksDb = [
-    {name: "Product 1", category: "Cat1", stock: 40, barcode: "23304291", minStock: 10},
-    {name: "Product 2", category: "Cat2", stock: 8, barcode: "23404203", minStock: 10},
-    {name: "Product 3", category: "Cat1", stock: 15, barcode: "23404205", minStock: 5}
+    {
+        name: "Product 1", category: "Cat1", stock: 40, barcode: "23304291", minStock: 10,
+        history:[
+            {date: "2026-02-10", size: "S", qty: 25},
+            {date: "2026-02-10", size: "M", qty: 50},
+            {date: "2026-01-15", size: "S", qty: 25}
+        ]
+    },
+    {
+        name: "Product 2", category: "Cat2", stock: 8, barcode: "23404203", minStock: 10,
+        history:[
+            {date: "2026-03-01", size: "-", qty: 10}
+        ]
+    },
+    {
+        name: "Product 3", category: "Cat1", stock: 15, barcode: "23404205", minStock: 5,
+        history:[
+            {date: "2026-02-17", size: "-", qty: 20}
+        ]
+    }
 ];
 
 //--LOAD STOCKS CARDS--
@@ -29,7 +46,8 @@ function loadStocks() {
             <div class="product-info">
                 <span class="product-name">${product.name}</span> 
                 <a href="javascript:void(0)" class="details-link" 
-                   onclick="showStockDetails('${product.name}', '${product.category}', ${product.stock}, '${product.barcode}', ${product.minStock})">→</a>
+                    onclick="showStockDetails('${product.name}')">→
+                </a>
             </div>
         `;
         grid.appendChild(card);
@@ -66,29 +84,44 @@ function filterProducts() {
 }
 
 //--STOCK DETAILS--
-function showStockDetails(name, cat, count, barcode, minStock) {
+function showStockDetails(productName) {
+    //Find product
+    const product = stocksDb.find(p => p.name === productName);
+    if (!product) return;
+
     const modal = document.getElementById('details-modal');
     const body = document.getElementById('modal-body');
-    //Default values if not provided
-    const bCode = barcode || "N/A";
-    const mStock = minStock || 10;
-    const isLow = count <= mStock;
+    const isLow = product.stock <= product.minStock;
 
-    //Sample Stock History
+    //Load history rows or message
+    let historyRows = "";
+    if (product.history && product.history.length > 0) {
+        historyRows = product.history.map(entry => `
+            <tr>
+                <td>${entry.date}</td>
+                <td>${entry.size}</td>
+                <td>${entry.qty}</td>
+            </tr>
+        `).join('');
+    } else {
+        historyRows = `<tr><td colspan="3" style="text-align:center; padding: 20px;">No transaction history available.</td></tr>`;
+    }
+    //Stock history modal
     body.innerHTML = `
         <div class="modal-header">
             <div>
-                <h2 style="margin:0">${name}</h2>
-                <span class="category-tag" style="position:static">${cat}</span>
-                <p style="font-size: 0.9rem; margin-top: 8px; color: #666;">Barcode: ${bCode}</p>
+                <h2 style="margin:0;">${product.name}</h2>
+                <p style="color:#666; margin: 5px 0;">Category: ${product.category}</p>
+                <p style="font-size: 0.9rem; color: #888;">Barcode: ${product.barcode}</p>
             </div>
             <div style="text-align:right">
-                <p>Current Stock: <strong style="font-size:1.5rem; color:${isLow ? 'red' : 'black'}">${count}</strong></p>
-                <p style="font-size: 0.85rem; color: #555;">Min. Stock Level: ${mStock}</p>
+                <p>Current Stock: <strong style="font-size:1.5rem; color:${isLow ? 'var(--low-stock-red)' : 'black'}">${product.stock}</strong></p>
+                <p style="font-size: 0.85rem; color: #555;">Min. Stock Level: ${product.minStock}</p>
                 ${isLow ? '<span class="stock-status-low">⚠️ Low stock!</span>' : ''}
             </div>
         </div>
-        <h3 style="margin-top:20px;">Order History</h3>
+
+        <h3 style="margin-top:25px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Stock In/Out History</h3>
         <table class="orders-table">
             <thead>
                 <tr>
@@ -98,18 +131,10 @@ function showStockDetails(name, cat, count, barcode, minStock) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>2/10/2026</td>
-                    <td>Size 1</td>
-                    <td>50</td>
-                </tr>
-                <tr>
-                    <td>1/15/2026</td>
-                    <td>Size 1</td>
-                    <td>50</td>
-                </tr>
+                ${historyRows}
             </tbody>
         </table>`;
+
     modal.style.display = "flex";
 }
 
